@@ -63,6 +63,10 @@ Where `γ` (gamma) is the **learnable scale** and `β` (beta) is the **learnable
 σ²_running ← momentum * σ²_running + (1 - momentum) * σ²_B
 ```
 
+> ⚠️ **TensorFlow/Keras convention:** TensorFlow's `BatchNormalization` layer uses `momentum` as the weight for the **old** running value (default `momentum=0.99`), giving:
+> `running_stat = 0.99 * running_stat + 0.01 * batch_stat`
+> The formula above uses the standard mathematical convention where `momentum` weights the new batch statistic. Both are equivalent with `momentum_keras = 1 - momentum_math`. When using Keras, a higher momentum (e.g., 0.99) means slower adaptation to new batch statistics.
+
 At inference time, the running statistics are used as fixed values. This means BN behaves differently in training mode vs inference mode — a critical implementation detail in Keras (controlled by the `training=True/False` argument).
 
 ### Where to Place Batch Normalization
