@@ -3,13 +3,12 @@ Lesson 5: The Convolution Operation Deep Dive
 Implements convolution from scratch and demonstrates filter effects.
 
 Run: python code/lesson_05.py
-Dependencies: tensorflow, numpy, matplotlib, scipy
+Dependencies: tensorflow, numpy, matplotlib
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
-from scipy.signal import convolve2d
 
 tf.random.set_seed(42)
 
