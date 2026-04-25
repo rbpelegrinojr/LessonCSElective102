@@ -111,8 +111,8 @@ print("  → Both produce the same result! This is translation invariance.")
 print("\n[SECTION 2] Keras Pooling Layers on Real Data (MNIST)")
 print("-" * 60)
 
-# Load MNIST to get real image data
-(x_train, _), _ = keras.datasets.mnist.load_data()
+# Load MNIST to get real image data (load labels too for subplot titles)
+(x_train, y_train), _ = keras.datasets.mnist.load_data()
 x_train = x_train.astype('float32') / 255.0
 
 # Add channel dimension: (N, 28, 28) → (N, 28, 28, 1)

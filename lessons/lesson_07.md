@@ -34,9 +34,9 @@ Max pooling takes the **maximum value** from each pooling window. It answers the
 ```
 Input Feature Map:        After 2×2 Max Pooling:
 ┌────┬────┬────┬────┐     ┌────┬────┐
-│  1 │  3 │  2 │  4 │     │  3 │  4 │
+│  1 │  3 │  2 │  4 │     │  6 │  4 │
 ├────┼────┼────┼────┤  →  ├────┼────┤
-│  5 │  6 │  1 │  2 │     │  6 │  5 │
+│  5 │  6 │  1 │  2 │     │  4 │  5 │
 ├────┼────┼────┼────┤     └────┴────┘
 │  3 │  2 │  5 │  1 │
 ├────┼────┼────┼────┤
@@ -45,9 +45,6 @@ Input Feature Map:        After 2×2 Max Pooling:
 ```
 
 **Step-by-step:**
-- Top-left 2×2 window: {1, 3, 5, 6} → max = **6**
-
-Wait, let me recompute:
 - Top-left window [row 0-1, col 0-1]: {1, 3, 5, 6} → max = **6**
 - Top-right window [row 0-1, col 2-3]: {2, 4, 1, 2} → max = **4**
 - Bottom-left window [row 2-3, col 0-1]: {3, 2, 1, 4} → max = **4**
