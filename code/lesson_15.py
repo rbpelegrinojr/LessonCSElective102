@@ -148,10 +148,6 @@ hist_bn = model_bn.fit(
 )
 time_bn = time.time() - t0
 
-acc_no_bn, _ = model_no_bn.evaluate(x_test, y_test, verbose=0)[::-1]
-acc_bn, _    = model_bn.evaluate(x_test, y_test, verbose=0)[::-1]
-
-# Correct evaluation
 _, test_acc_no_bn = model_no_bn.evaluate(x_test, y_test, verbose=0)
 _, test_acc_bn    = model_bn.evaluate(x_test, y_test, verbose=0)
 
