@@ -39,11 +39,11 @@ Every dataset must be divided into at least three parts before any training begi
 
 **Common split ratios:**
 
-| Dataset Size | Train | Validation | Test |
-|--------------|-------|------------|------|
-| Small (<5K)  | 70%   | 15%        | 15%  |
-| Medium (5K–100K) | 80% | 10%     | 10%  |
-| Large (>100K)| 90%   | 5%         | 5%   |
+| Dataset Size         | Train | Validation | Test |
+|----------------------|-------|------------|------|
+| Small (<5K)          | 70%   | 15%        | 15%  |
+| Medium (5K–100K)     | 80%   | 10%        | 10%  |
+| Large (>100K)        | 90%   | 5%         | 5%   |
 
 For very large datasets, even 1% for validation/test may be hundreds of thousands of samples — more than enough for reliable evaluation.
 

@@ -170,12 +170,12 @@ The most informative diagnostic in deep learning is the training and validation 
 
 **Healthy training:**
 ```
-Loss                          Accuracy
-1.5 |\.                       0.5 |    ...------
-1.0 | `\.                     0.7 |  ..
-0.5 |   `\....---             0.9 |./
-    +───────────── epochs         +────────── epochs
-    — train  - - val              — train  - - val
+Loss                              Accuracy
+1.5 |\.                           0.5 |     ...------
+1.0 | `\.                         0.7 |   ..
+0.5 |   `\....---                 0.9 |./
+    +──────────────── epochs          +────────── epochs
+    — train   - - val                 — train   - - val
 ```
 Both training and validation metrics improve together, with a small gap (validation slightly worse than training). This is the ideal case.
 
