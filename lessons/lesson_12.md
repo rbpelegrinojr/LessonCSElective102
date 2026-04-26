@@ -192,16 +192,9 @@ p, r, f1, support = precision_recall_fscore_support(y_true, y_pred)
 
 ## Activities
 
-1. **Imbalanced Dataset Experiment:** Create a dataset where one class has 95% of the examples. Train a model that just predicts the majority class. Calculate accuracy and F1 score and compare. Explain the discrepancy.
+1. **Confusion Matrix:** Train a CIFAR-10 classifier for 10 epochs. Generate predictions on the test set and plot the confusion matrix using `sklearn.metrics.ConfusionMatrixDisplay`. Identify and print the two most frequently confused class pairs.
 
-2. **Threshold Analysis:** For a binary classifier, plot precision and recall as a function of the decision threshold from 0 to 1. Identify the threshold that maximizes F1 score.
-
-3. **Confusion Matrix Interpretation:** Train a CIFAR-10 classifier. Look at the confusion matrix and identify the two most confused class pairs. Explain why those classes might be difficult to distinguish.
-
-4. **ROC Curve Comparison:** Train three different models (different architectures/hyperparameters). Plot their ROC curves on the same axes and compare their AUC scores.
-
----
-
+2. **Per-Class Metrics:** Using `sklearn.metrics.classification_report`, compute per-class precision, recall, and F1-score for your CIFAR-10 model. Print the report and write code to extract and display the class with the lowest F1-score.
 ## Review Questions
 
 1. Why can a classifier with 99% accuracy be completely useless? Describe a concrete example.

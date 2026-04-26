@@ -205,16 +205,9 @@ def dense_bn_block(units, dropout_rate=0.5):
 
 ## Activities
 
-1. **Covariate Shift Demo:** Train a 10-layer MLP without BN on CIFAR-10. Log the mean and standard deviation of activations at layer 5 over epochs. Then add BN and compare the activation statistics.
+1. **Batch Normalization Stability:** Build two identical 5-layer CNNs for CIFAR-10 — one without any `BatchNormalization` layers and one with a `BatchNormalization` layer after every `Conv2D`. Train both for 10 epochs and plot their training loss curves on the same axes. Comment on the difference in stability.
 
-2. **BN Placement Experiment:** Build three identical architectures: (a) no BN, (b) BN before activation, (c) BN after activation. Compare training speed and final accuracy.
-
-3. **Dropout Rate Search:** Train the same model with dropout rates `{0, 0.2, 0.4, 0.5, 0.7}`. Plot final validation accuracy vs dropout rate. Find the optimal rate.
-
-4. **SpatialDropout2D vs Dropout for CNNs:** Compare standard Dropout (applied to flattened feature maps) vs SpatialDropout2D (applied to convolutional feature maps) on CIFAR-10. Which provides better regularization?
-
----
-
+2. **Dropout Rate Search:** Using the same CNN base, train five models with `Dropout` rates `[0.0, 0.2, 0.4, 0.5, 0.7]` inserted before the final `Dense` layer. After 10 epochs each, plot validation accuracy vs. dropout rate as a line graph and print the rate that gives the highest validation accuracy.
 ## Review Questions
 
 1. What is internal covariate shift? Why does it make training deep networks difficult?

@@ -160,18 +160,9 @@ See `code/lesson_01.py` for hands-on examples demonstrating:
 
 ## Activities
 
-1. **Manual CIFAR-10 Classification:** Visit the CIFAR-10 website (https://www.cs.toronto.edu/~kriz/cifar.html) and look at sample images. Try to manually classify 20 images. Note which classes you found most confusing and why.
+1. **Load and Visualize MNIST:** Using TensorFlow/Keras, load the MNIST dataset with `tf.keras.datasets.mnist.load_data()`. Print the shape and dtype of the training images. Then display a 2×5 grid (one image per digit class) using matplotlib.
 
-2. **Real-World Research:** Research three real-world products that use image classification (suggestions: Google Lens, Apple Face ID, Tesla Autopilot, Snapchat filters, Amazon Go). For each, describe what classes they predict and what happens when they make an error.
-
-3. **MNIST Class Analysis:** List all 10 classes in MNIST (digits 0–9). For each digit, write 2–3 sentences describing what visual features make it unique and what makes it easy to confuse with other digits (e.g., 1 vs 7, 3 vs 8).
-
-4. **Pipeline Diagram:** Draw (on paper or digitally) the complete input-output pipeline for a cat vs. dog classifier. Include: raw image → preprocessing → model → probability vector → argmax → predicted label. Label each step.
-
-5. **ImageNet Challenge:** Read the Wikipedia article on ImageNet Large Scale Visual Recognition Challenge (ILSVRC). Write a half-page summary of: when it started, why it was important, what AlexNet did in 2012, and how top-5 error has changed over the years.
-
----
-
+2. **Forward Pass Pipeline:** Build a minimal Keras `Sequential` dense classifier for MNIST (Flatten → Dense(128, relu) → Dense(10, softmax)). Call `model.predict()` on one test image (add the batch dimension first) and print the resulting probability vector alongside the true label.
 ## Review Questions
 
 1. What is the difference between image classification and object detection? Give a specific example where you would need detection instead of classification.

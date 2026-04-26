@@ -280,23 +280,9 @@ val_ds = (tf.data.Dataset.from_tensor_slices((X_val, y_val))
 
 ## Activities
 
-### Activity 9.1 — Dataset Exploration
-Run Section 1 of `code/lesson_09.py`. Print the shape, min, max, mean, and dtype of the raw CIFAR-10 training data. How many samples per class are there?
+1. **Dataset Exploration:** Load CIFAR-10 with `tf.keras.datasets.cifar10.load_data()`. Print the shape, dtype, min, max, and mean of the raw training images. Use `np.unique(y_train, return_counts=True)` to confirm there are exactly 5 000 samples per class.
 
-### Activity 9.2 — Split Verification
-After creating your train/val/test splits in Section 2, verify the class distribution in each split using `np.unique(y, return_counts=True)`. Are the distributions similar?
-
-### Activity 9.3 — Pipeline Benchmarking
-In Section 3, measure how long it takes to iterate through one epoch of data with and without `.prefetch()`. Use `time.time()` to measure.
-
-### Activity 9.4 — Normalization Effect
-Train a small network for 2 epochs on raw [0, 255] pixel values, then repeat with normalized [0, 1] values. Compare the starting loss values. What do you observe?
-
-### Activity 9.5 — Class Imbalance
-Create an artificially imbalanced version of CIFAR-10 by keeping only 10% of "airplane" samples. Train a model on it. What accuracy does it achieve on the airplane class?
-
----
-
+2. **Pipeline Benchmarking:** Build two `tf.data.Dataset` pipelines from the CIFAR-10 training data — one without `.prefetch()` and one with `.prefetch(tf.data.AUTOTUNE)`. Use `time.time()` to measure the wall-clock time to iterate through one full epoch of batches (batch size 64) for each and print the difference.
 ## Review Questions
 
 1. What does "garbage in, garbage out" mean in the context of machine learning?

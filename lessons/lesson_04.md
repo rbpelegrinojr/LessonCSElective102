@@ -216,18 +216,9 @@ See `code/lesson_04.py` for hands-on examples demonstrating:
 
 ## Activities
 
-1. **Parameter Count Exercise:** Calculate the total number of trainable parameters in a dense network with architecture: [3072 inputs → 2048 → 1024 → 512 → 10]. Show your calculation for each layer (inputs × outputs + biases). What is the total? How does this compare to a simple CNN?
+1. **Parameter Count Comparison:** Build (a) a dense network [3072 → 2048 → 1024 → 10] and (b) a small CNN [Conv2D(32, 3) → MaxPool → Conv2D(64, 3) → Flatten → Dense(10)] for 32×32×3 inputs using the Keras Functional API. Call `model.summary()` on each and record the total parameter counts.
 
-2. **Spatial Invariance Visualization:** Take a 10×10 pixel grid of zeros. Place a simple feature (e.g., a 2×2 block of ones) in the top-left corner. Now shift it to the bottom-right corner. Explain in writing why a dense network treats these as entirely different inputs, while a CNN would detect the same feature in both cases.
-
-3. **Architecture Analysis:** Look up the VGG-16 architecture. Count the number of convolutional layers, pooling layers, and dense layers. What is the total parameter count? (Hint: it's in the original paper by Simonyan & Zisserman, 2014.) Why do the dense layers at the end account for the majority of parameters?
-
-4. **Inductive Bias Discussion:** Identify a domain where CNNs' inductive biases (locality, translation invariance) might NOT be appropriate. Describe the domain and explain which assumption breaks down.
-
-5. **CNN vs Dense Comparison Table:** Create your own comparison table (more detailed than the one in this lesson) comparing dense networks vs CNNs on at least 8 dimensions. Include: parameter count for a specific example, training speed, generalization, ability to handle different image sizes, and 4 others of your choice.
-
----
-
+2. **Feature Map Shape Tracing:** Build a 2-block CNN in Keras and, for each Conv2D and MaxPooling2D layer, manually predict the output spatial dimensions using `floor((W - F + 2P) / S) + 1`. Verify your predictions match `model.summary()`.
 ## Review Questions
 
 1. Why does applying a dense (fully connected) network to a 224×224×3 image result in a computationally intractable model? Calculate the number of parameters in the first layer if it has 4,096 neurons.

@@ -222,31 +222,9 @@ def max_pool_2d(feature_map, pool_size=2, stride=2):
 
 ## Activities
 
-### Activity 7.1 — Manual Pooling
-Given this 6×6 feature map, manually apply 2×2 max pooling with stride 2 and write the output:
-```
-[ 4  3  2  1  0  1 ]
-[ 2  1  0  3  4  2 ]
-[ 5  6  1  2  3  4 ]
-[ 3  2  4  5  1  0 ]
-[ 0  1  2  3  6  7 ]
-[ 1  0  3  2  5  4 ]
-```
+1. **MaxPool vs AveragePool:** Using a `tf.keras.layers.MaxPooling2D` and a `tf.keras.layers.AveragePooling2D` layer (both pool_size=2, stride=2), apply each to the same randomly generated 8×8 feature map tensor. Print both output arrays and highlight cells where they differ.
 
-### Activity 7.2 — Keras Pooling
-Run `code/lesson_07.py` Section 2. Apply both MaxPooling2D and AveragePooling2D to the same feature map. Compare the outputs visually — where do they differ most?
-
-### Activity 7.3 — Dimension Tracing
-Build a small CNN in Keras and trace the output shape after each pooling layer by printing `model.summary()`. Predict the final feature map size before running the model.
-
-### Activity 7.4 — GAP vs Flatten
-Run Section 4 of the code. Compare a model using GlobalAveragePooling2D versus Flatten before the final Dense layers. Count the parameters in each model. How many parameters does GAP save?
-
-### Activity 7.5 — No Pooling vs With Pooling
-Modify the CNN in Section 5 to remove all pooling layers. What happens to the output dimensions? What happens to the parameter count in the Dense layer?
-
----
-
+2. **Dimension Tracing:** Build a small Keras CNN (2 Conv2D + MaxPooling2D blocks) for 32×32×3 inputs. Before running `model.summary()`, manually compute the spatial dimensions after each pooling layer. Verify your predictions against the summary output.
 ## Review Questions
 
 1. What is the primary purpose of a pooling layer in a CNN?

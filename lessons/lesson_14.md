@@ -200,16 +200,9 @@ datagen.fit(X_train)
 
 ## Activities
 
-1. **Augmentation Gallery:** Take a single image from CIFAR-10. Apply each augmentation technique individually and display the results in a grid. Note which augmentations look realistic.
+1. **Augmentation Gallery:** Pick one image from CIFAR-10. Apply each of these five transforms individually using Keras preprocessing layers: `RandomFlip('horizontal')`, `RandomRotation(0.2)`, `RandomZoom(0.2)`, `RandomContrast(0.3)`, and `RandomTranslation(0.1, 0.1)`. Display the original plus five augmented versions in a 2×3 matplotlib grid.
 
-2. **Augmentation Impact Study:** Train two identical CNNs on CIFAR-10 — one with and one without augmentation. Plot validation accuracy curves. Quantify the improvement.
-
-3. **MNIST Danger Zone:** Apply 180° rotation augmentation to MNIST and train a model. Compare accuracy to a model trained without rotation. Explain the result.
-
-4. **TTA Implementation:** Implement TTA with 8 augmented versions of each test image. Compare accuracy with and without TTA on CIFAR-10.
-
----
-
+2. **Augmentation Impact Study:** Train two identical CNNs on CIFAR-10 for 15 epochs — one with no augmentation and one with random horizontal flip, rotation (±15°), and zoom (±10%). Plot both validation accuracy curves on the same axes and print the final accuracy difference.
 ## Review Questions
 
 1. Why does data augmentation improve generalization even without changing the model architecture?

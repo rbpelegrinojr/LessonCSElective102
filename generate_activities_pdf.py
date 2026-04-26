@@ -1,11 +1,12 @@
 """
-generate_pdf.py - Compile all 20 CNN course lessons into a single PDF.
+generate_activities_pdf.py - Compile the coding activities for all 20 CNN
+course lessons into a standalone Activities PDF.
 
 Usage:
-    python generate_pdf.py
+    python generate_activities_pdf.py
 
 Output:
-    CNN_Image_Classification_Course.pdf  (written to the repository root)
+    CNN_Image_Classification_Course_Activities.pdf  (written to the repo root)
 """
 
 from fpdf import FPDF
@@ -29,7 +30,7 @@ LESSON_TITLES = [
     "Dataset Preparation & Loading",
     "Training a CNN",
     "Loss Functions & Optimizers",
-    "Evaluating Your Model — Metrics & Confusion Matrix",
+    "Evaluating Your Model -- Metrics & Confusion Matrix",
     "Overfitting & Regularization Techniques",
     "Data Augmentation",
     "Batch Normalization & Dropout",
@@ -37,18 +38,18 @@ LESSON_TITLES = [
     "Fine-Tuning Pretrained Models",
     "Model Visualization & Interpretability (Grad-CAM)",
     "Deploying Your CNN Model",
-    "Capstone Project — End-to-End Image Classifier",
+    "Capstone Project -- End-to-End Image Classifier",
 ]
 
 # ---------------------------------------------------------------------------
 # PDF class
 # ---------------------------------------------------------------------------
 
-class CoursePDF(FPDF):
+
+class ActivitiesPDF(FPDF):
     """Custom FPDF subclass with a minimal footer showing page numbers."""
 
     def header(self):
-        # No running header — the cover/TOC pages look cleaner without one.
         pass
 
     def footer(self):
@@ -56,7 +57,7 @@ class CoursePDF(FPDF):
         self.set_font("Helvetica", "I", 8)
         self.cell(
             0, 10,
-            f"Image Classification Using CNNs  \u2014  Page {self.page_no()}",
+            f"Image Classification Using CNNs -- Coding Activities  --  Page {self.page_no()}",
             align="C",
         )
 
@@ -65,11 +66,12 @@ class CoursePDF(FPDF):
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _safe(text: str) -> str:
-    """Replace characters that are outside latin-1 with ASCII equivalents."""
+    """Replace characters outside latin-1 with ASCII equivalents."""
     replacements = {
-        "\u2014": "--",   # em dash
-        "\u2013": "-",    # en dash
+        "\u2014": "--",
+        "\u2013": "-",
         "\u2018": "'",
         "\u2019": "'",
         "\u201c": '"',
@@ -89,46 +91,30 @@ def _safe(text: str) -> str:
     }
     for char, replacement in replacements.items():
         text = text.replace(char, replacement)
-    # Final fallback: encode to latin-1, replacing unmappable chars with '?'
     return text.encode("latin-1", errors="replace").decode("latin-1")
-
-
-def remove_activities_section(text: str) -> str:
-    """Remove the ## Activities section from Markdown content."""
-    return re.sub(r"\n## Activities\n.*?(?=\n## |\Z)", "", text, flags=re.DOTALL)
 
 
 def strip_markdown(text: str) -> str:
     """Convert Markdown to plain readable text."""
-    # Remove ATX headings (keep the heading text)
     text = re.sub(r"^#{1,6}\s+", "", text, flags=re.MULTILINE)
-    # Bold / italic
     text = re.sub(r"\*\*(.*?)\*\*", r"\1", text)
     text = re.sub(r"\*(.*?)\*", r"\1", text)
     text = re.sub(r"__(.*?)__", r"\1", text)
     text = re.sub(r"_(.*?)_", r"\1", text)
-    # Inline code
     text = re.sub(r"`(.*?)`", r"\1", text)
-    # Fenced code blocks — keep content, drop fences
     text = re.sub(r"^```[^\n]*\n", "", text, flags=re.MULTILINE)
     text = re.sub(r"^```", "", text, flags=re.MULTILINE)
-    # Tables — drop separator rows, strip pipes from data rows
     text = re.sub(r"^\|[-| :]+\|$", "", text, flags=re.MULTILINE)
     text = re.sub(r"^\|(.*)\|$", lambda m: m.group(1).replace("|", "  "), text, flags=re.MULTILINE)
-    # Unordered list bullets
     text = re.sub(r"^[-*+]\s+", "  * ", text, flags=re.MULTILINE)
-    # Ordered list numbers — strip numbers, keep text
     text = re.sub(r"^\d+\.\s+", "  ", text, flags=re.MULTILINE)
-    # Hyperlinks — keep display text
     text = re.sub(r"\[([^\]]+)\]\([^\)]+\)", r"\1", text)
-    # Horizontal rules
     text = re.sub(r"^---+$", "", text, flags=re.MULTILINE)
-    # Collapse 3+ blank lines into 2
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
 
 
-def add_text_block(pdf: CoursePDF, text: str, font: str = "Helvetica",
+def add_text_block(pdf: ActivitiesPDF, text: str, font: str = "Helvetica",
                    style: str = "", size: int = 10, line_height: int = 6) -> None:
     """Write a block of plain text, wrapping long lines automatically."""
     pdf.set_font(font, style, size)
@@ -140,11 +126,24 @@ def add_text_block(pdf: CoursePDF, text: str, font: str = "Helvetica",
             pdf.multi_cell(0, line_height, safe_line)
 
 
+def extract_activities(md_path: str) -> str:
+    """Return only the ## Activities section from a lesson Markdown file."""
+    if not os.path.exists(md_path):
+        return ""
+    with open(md_path, "r", encoding="utf-8", errors="replace") as f:
+        content = f.read()
+    m = re.search(r"## Activities\n(.*?)(?=\n## |\Z)", content, re.DOTALL)
+    if m:
+        return m.group(1).strip()
+    return ""
+
+
 # ---------------------------------------------------------------------------
 # Page builders
 # ---------------------------------------------------------------------------
 
-def add_cover_page(pdf: CoursePDF) -> None:
+
+def add_cover_page(pdf: ActivitiesPDF) -> None:
     pdf.add_page()
     pdf.ln(40)
 
@@ -153,7 +152,7 @@ def add_cover_page(pdf: CoursePDF) -> None:
     pdf.ln(6)
 
     pdf.set_font("Helvetica", "B", 18)
-    pdf.cell(0, 10, "CS Elective 102 -- Complete Course", align="C", ln=True)
+    pdf.cell(0, 10, "CS Elective 102 -- Coding Activities", align="C", ln=True)
     pdf.ln(20)
 
     pdf.set_draw_color(100, 100, 100)
@@ -170,14 +169,14 @@ def add_cover_page(pdf: CoursePDF) -> None:
 
     pdf.set_font("Helvetica", "I", 11)
     description = (
-        "A 20-lesson university-level course covering Convolutional Neural Networks "
-        "for image classification -- from pixel fundamentals to model deployment -- "
-        "with full Python/TensorFlow code for every lesson."
+        "2 coding activities per lesson across all 20 lessons of the CNN Image "
+        "Classification course. Each activity requires writing or running Python "
+        "code using TensorFlow/Keras, NumPy, and related libraries."
     )
     pdf.multi_cell(0, 7, _safe(description), align="C")
 
 
-def add_toc_page(pdf: CoursePDF) -> None:
+def add_toc_page(pdf: ActivitiesPDF) -> None:
     pdf.add_page()
     pdf.set_font("Helvetica", "B", 20)
     pdf.cell(0, 12, "Table of Contents", ln=True)
@@ -198,8 +197,8 @@ def add_toc_page(pdf: CoursePDF) -> None:
         pdf.ln(1)
 
 
-def add_lesson_page(pdf: CoursePDF, lesson_num: int, title: str,
-                    md_path: str, py_path: str) -> None:
+def add_activities_page(pdf: ActivitiesPDF, lesson_num: int, title: str,
+                        md_path: str) -> None:
     pdf.add_page()
 
     # Lesson header
@@ -212,51 +211,32 @@ def add_lesson_page(pdf: CoursePDF, lesson_num: int, title: str,
     pdf.set_line_width(0.4)
     x_margin = pdf.l_margin
     pdf.line(x_margin, pdf.get_y(), pdf.w - x_margin, pdf.get_y())
-    pdf.ln(6)
-
-    # Lesson markdown content (Activities section excluded — see Activities PDF)
-    if os.path.exists(md_path):
-        with open(md_path, "r", encoding="utf-8", errors="replace") as f:
-            raw_md = f.read()
-        raw_md = remove_activities_section(raw_md)
-        plain_text = strip_markdown(raw_md)
-        add_text_block(pdf, plain_text, font="Helvetica", size=10, line_height=6)
-    else:
-        pdf.set_font("Helvetica", "I", 10)
-        pdf.cell(0, 7, f"[Lesson file not found: {os.path.basename(md_path)}]", ln=True)
-        print(f"  WARNING: {md_path} not found — skipping markdown section.")
-
-    # Separator
-    pdf.ln(6)
-    pdf.set_draw_color(120, 120, 120)
-    pdf.set_line_width(0.3)
-    pdf.line(x_margin, pdf.get_y(), pdf.w - x_margin, pdf.get_y())
     pdf.ln(4)
-    pdf.set_font("Helvetica", "B", 10)
-    pdf.cell(0, 7, "--- Python Code ---", ln=True)
+
+    pdf.set_font("Helvetica", "B", 11)
+    pdf.cell(0, 8, "Coding Activities", ln=True)
     pdf.ln(2)
 
-    # Python source code
-    if os.path.exists(py_path):
-        with open(py_path, "r", encoding="utf-8", errors="replace") as f:
-            code = f.read()
-        add_text_block(pdf, code, font="Courier", size=8, line_height=5)
+    activities_text = extract_activities(md_path)
+    if activities_text:
+        plain = strip_markdown(activities_text)
+        add_text_block(pdf, plain, font="Helvetica", size=10, line_height=6)
     else:
         pdf.set_font("Helvetica", "I", 10)
-        pdf.cell(0, 7, f"[Code file not found: {os.path.basename(py_path)}]", ln=True)
-        print(f"  WARNING: {py_path} not found — skipping code section.")
+        pdf.cell(0, 7, f"[Activities not found in: {os.path.basename(md_path)}]", ln=True)
+        print(f"  WARNING: activities not found in {md_path}")
 
 
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
+
 def main() -> None:
     base_dir = os.path.dirname(os.path.abspath(__file__))
     lessons_dir = os.path.join(base_dir, "lessons")
-    code_dir = os.path.join(base_dir, "code")
 
-    pdf = CoursePDF()
+    pdf = ActivitiesPDF()
     pdf.set_auto_page_break(auto=True, margin=15)
 
     # Cover
@@ -265,18 +245,17 @@ def main() -> None:
     # Table of Contents
     add_toc_page(pdf)
 
-    # One page (or more) per lesson
+    # One page per lesson (activities only)
     for i, title in enumerate(LESSON_TITLES, 1):
         lesson_num_str = f"{i:02d}"
         md_path = os.path.join(lessons_dir, f"lesson_{lesson_num_str}.md")
-        py_path = os.path.join(code_dir, f"lesson_{lesson_num_str}.py")
-        print(f"  Adding Lesson {lesson_num_str}: {title}")
-        add_lesson_page(pdf, i, title, md_path, py_path)
+        print(f"  Adding activities for Lesson {lesson_num_str}: {title}")
+        add_activities_page(pdf, i, title, md_path)
 
     # Save
-    output_path = os.path.join(base_dir, "CNN_Image_Classification_Course.pdf")
+    output_path = os.path.join(base_dir, "CNN_Image_Classification_Course_Activities.pdf")
     pdf.output(output_path)
-    print(f"\nPDF saved to: {output_path}")
+    print(f"\nActivities PDF saved to: {output_path}")
 
 
 if __name__ == "__main__":

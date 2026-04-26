@@ -200,18 +200,9 @@ See `code/lesson_03.py` for hands-on examples demonstrating:
 
 ## Activities
 
-1. **Neuron by Hand:** Given inputs x = [1.0, 2.0, -1.0], weights w = [0.5, -0.3, 0.8], and bias b = 0.1, manually compute the pre-activation z and then apply the ReLU activation. Show all steps.
+1. **Neuron from Scratch:** In NumPy, implement a single ReLU neuron: given a weight vector `w`, bias `b`, and input `x`, compute `ReLU(w · x + b)`. Test it with at least three different input vectors and print the outputs.
 
-2. **Activation Function Graphs:** Plot (on paper or in code) the sigmoid, tanh, and ReLU functions over the range x = [-5, 5]. Identify the output range, derivatives at 0, and saturation regions for each.
-
-3. **XOR by Hand:** XOR outputs 1 when inputs differ and 0 when they match. Why can a single perceptron NOT learn XOR? Draw the truth table and attempt to draw a separating hyperplane. Then explain why a 2-layer network can solve it.
-
-4. **Loss Intuition:** For a 3-class problem, compute the cross-entropy loss for the following cases: (a) prediction=[0.9, 0.05, 0.05], true class=0; (b) prediction=[0.33, 0.34, 0.33], true class=1; (c) prediction=[0.1, 0.1, 0.8], true class=0. Which has the highest loss and why?
-
-5. **Architecture Design:** Design (on paper) a neural network for classifying MNIST digits (28×28 grayscale). Specify: how many input neurons, how many hidden layers and their sizes, how many output neurons, and what activation functions you would use where and why.
-
----
-
+2. **XOR MLP:** Build a 2-layer `keras.Sequential` MLP (input: 2 → Dense(4, relu) → Dense(1, sigmoid)). Train it on the XOR dataset (4 samples) for 1 000 epochs with Adam. Print the final predictions and compare them to the true labels `[0, 1, 1, 0]`.
 ## Review Questions
 
 1. What role does the activation function play in a neural network? What would happen if you used no activation functions between layers?

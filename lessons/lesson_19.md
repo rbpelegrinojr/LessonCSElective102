@@ -167,14 +167,9 @@ predictions = interpreter.get_tensor(output_details[0]['index'])
 
 ## Activities
 
-1. **Save Both Formats**: Save a trained model in `.h5` and `SavedModel` formats. Compare file sizes with `os.path.getsize`.
-2. **TFLite Conversion**: Convert to TFLite with and without quantization. Compare sizes and inference times.
-3. **Batch Timing**: Time inference for batch sizes 1, 8, 32, 128. Plot throughput (images/second) vs. batch size.
-4. **Inference Function**: Write a `predict_image(path)` function that loads an image file, preprocesses it, runs inference, and returns the class label and confidence.
-5. **Simulate API**: Write a simple function that mimics a REST endpoint: accepts a base64-encoded image string and returns a JSON-like dictionary with predictions.
+1. **Save and Reload:** Save a trained Keras model in both `.h5` format and `SavedModel` format using `model.save()`. Use `os.path.getsize()` (for `.h5`) and `os.path.getsize()` on each file in the `SavedModel` directory (sum them) to compare sizes. Reload each with `tf.keras.models.load_model()` and assert that predictions on 10 test images are identical.
 
----
-
+2. **TFLite Conversion and Timing:** Convert the same Keras model to TFLite using `tf.lite.TFLiteConverter.from_keras_model()`. Load the `.tflite` file with `tf.lite.Interpreter`, run inference on a single image 100 times, and print the average inference time. Compare it to the average Keras inference time for the same image.
 ## Review Questions
 
 1. What is the difference between `.h5` and `SavedModel` formats? When would you prefer each?
