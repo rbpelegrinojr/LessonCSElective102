@@ -186,21 +186,9 @@ See `code/lesson_02.py` for hands-on examples demonstrating:
 
 ## Activities
 
-1. **Pixel Inspector:** Open any image in an image editor (GIMP, Photoshop, or even MS Paint). Use the color picker/eyedropper tool to inspect pixel values at different locations. Record the RGB values of 10 pixels from different parts of the image (sky, skin, grass, shadow). What patterns do you notice?
+1. **RGB Channel Split:** Load any color image with `PIL.Image.open()`. Convert it to a NumPy array and extract the R, G, and B channels separately. Display the three channels as grayscale images in a 1×3 matplotlib subplot.
 
-2. **Format Comparison:** Take the same image file and save it as JPEG at quality 10%, quality 80%, and 100%, plus as PNG. Compare file sizes and visual quality. At what quality setting does JPEG compression become visible?
-
-3. **Memory Calculator:** Calculate the memory (in MB) needed for a training batch in the following scenarios:
-   - 64 images at 32×32 pixels, 3 channels, float32
-   - 16 images at 512×512 pixels, 3 channels, float32
-   - 8 images at 1024×1024 pixels, 1 channel, float32
-
-4. **Normalization Intuition:** Without code, explain in writing why dividing pixel values by 255 is called "min-max normalization." What would happen to training if you forgot this step and fed raw 0–255 values to a neural network?
-
-5. **Tensor Shape Practice:** Given the following scenarios, write the correct tensor shape: (a) a batch of 32 grayscale 28×28 images; (b) a single color 224×224 image ready for inference; (c) 100 training examples of 64×64 satellite images with 4 spectral bands.
-
----
-
+2. **Normalization Verification:** Write a function `normalize_batch(images)` that accepts a uint8 NumPy array of shape `(N, H, W, C)` and returns a float32 array with values in [0.0, 1.0]. Apply it to the first 100 CIFAR-10 training images and use `assert` statements to verify the output dtype, min value, and max value.
 ## Review Questions
 
 1. Explain the difference between a JPEG and a PNG file. When would you prefer each for a deep learning dataset?

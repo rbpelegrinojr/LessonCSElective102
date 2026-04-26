@@ -187,18 +187,9 @@ model.summary()
 
 ## Activities
 
-1. **Explore Model Architectures**: Load VGG16, ResNet50, and MobileNetV2 with `include_top=False`. Print the number of layers and parameters for each. Which is largest? Which is smallest?
+1. **Feature Extractor Setup:** Load `MobileNetV2(include_top=False, input_shape=(96,96,3), weights='imagenet')` and set `base_model.trainable = False`. Add `GlobalAveragePooling2D()` and `Dense(10, activation='softmax')` on top. Print `model.summary()` and confirm that no `MobileNetV2` layers are marked as trainable.
 
-2. **Feature Extraction on CIFAR-10**: Use MobileNetV2 as a frozen feature extractor on CIFAR-10. Resize images to 96×96. Train only the new head for 5 epochs. Record the final validation accuracy.
-
-3. **Compare Preprocessing**: Load a sample CIFAR-10 image and apply the MobileNetV2 `preprocess_input` function. Plot the original image and the preprocessed image side by side. What changed?
-
-4. **Layer Inspector**: After loading MobileNetV2, iterate through `model.layers` and print the name, type, and `trainable` status of every layer.
-
-5. **Experiment**: Change the number of units in the Dense head (64, 128, 256, 512). How does this affect validation accuracy and training time?
-
----
-
+2. **Train the Classification Head:** Using the frozen feature extractor from Activity 1, compile with Adam and categorical cross-entropy, and train on CIFAR-10 (images resized to 96×96, pixel values preprocessed with `tf.keras.applications.mobilenet_v2.preprocess_input`) for 5 epochs. Print the final training and validation accuracy.
 ## Review Questions
 
 1. What is transfer learning, and why is it particularly useful when you have a small dataset?

@@ -188,16 +188,9 @@ reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(
 
 ## Activities
 
-1. **Experiment with Learning Rates:** Train a simple CNN on CIFAR-10 with learning rates of `0.1`, `0.01`, `0.001`, and `0.0001`. Plot the training curves and identify which rate causes divergence and which causes slow convergence.
+1. **Learning Rate Sweep:** Train a small CNN on CIFAR-10 with learning rates `[0.1, 0.01, 0.001, 0.0001]`. Run each for 10 epochs with Adam. On a single matplotlib figure, plot the four training loss curves and label each with its learning rate.
 
-2. **Optimizer Comparison:** Using the same architecture and dataset, train four models: SGD (no momentum), SGD + momentum, RMSProp, and Adam. Compare final validation accuracy and loss curves.
-
-3. **Loss Function Swap:** Take a classification model and swap cross-entropy for MSE. Observe how training degrades. Explain why in your notes.
-
-4. **Custom Learning Rate Schedule:** Implement a step decay schedule that halves the learning rate every 10 epochs. Use `tf.keras.callbacks.LearningRateScheduler`.
-
----
-
+2. **Optimizer Comparison:** Using the same CNN architecture and CIFAR-10, train three models: `SGD(lr=0.01)`, `SGD(lr=0.01, momentum=0.9)`, and `Adam(lr=0.001)`. After 10 epochs, plot their validation accuracy curves on the same axes and print the final validation accuracy for each.
 ## Review Questions
 
 1. Why does using a very high learning rate cause training to diverge?

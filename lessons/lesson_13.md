@@ -201,16 +201,9 @@ history = model.fit(X_train, y_train,
 
 ## Activities
 
-1. **Overfitting Playground:** Use a very deep MLP on a tiny subset (500 examples) of CIFAR-10. Watch the training/validation gap widen. Then add dropout layers and compare the curves.
+1. **Dropout vs No Dropout:** Train a 4-layer dense network on 500 CIFAR-10 examples for 50 epochs — once without any dropout and once with `Dropout(0.5)` after each hidden layer. On a single figure, plot training accuracy and validation accuracy for both runs to visualize the overfitting gap.
 
-2. **L2 Lambda Search:** Train the same model with `λ ∈ {0, 0.0001, 0.001, 0.01, 0.1}`. Plot validation accuracy vs. lambda. Find the sweet spot.
-
-3. **Early Stopping Investigation:** Train a model for 200 epochs. Log when early stopping would have triggered (patience=10). Compare the final model to the best-saved model.
-
-4. **Bias-Variance Decomposition:** Train 10 identical models on different random subsets of data. Measure prediction variance across models and relate to the overfitting/underfitting behavior.
-
----
-
+2. **L2 Regularization Search:** Train the same architecture with `kernel_regularizer=l2(lambda_)` for lambda_ in `[0, 1e-4, 1e-3, 1e-2]`. For each, record the best validation accuracy. Plot validation accuracy vs. lambda on a bar chart and print the best lambda value.
 ## Review Questions
 
 1. A model achieves 98% training accuracy and 60% validation accuracy. What is happening? List three techniques to address this.

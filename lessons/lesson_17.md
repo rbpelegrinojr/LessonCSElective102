@@ -218,18 +218,9 @@ history2 = model.fit(train_ds, epochs=5, validation_data=val_ds)
 
 ## Activities
 
-1. **Phase 1 vs. Phase 2 Curves**: Run the two-phase training described in the code reference. Plot training and validation accuracy for both phases on a single graph. Annotate where Phase 2 begins.
+1. **Two-Phase Training Curves:** Starting from the frozen feature extractor (Phase 1) trained in Lesson 16, unfreeze the last 20 layers of MobileNetV2 and run Phase 2 fine-tuning for 10 epochs with `Adam(lr=1e-5)`. Plot training and validation accuracy for both phases on a single graph, annotating the boundary between phases.
 
-2. **Learning Rate Sensitivity**: In Phase 2, try three different learning rates: `1e-3`, `1e-4`, `1e-5`. For each, plot the validation loss curve. What happens with `1e-3`? What about `1e-5`?
-
-3. **Gradual Unfreezing Experiment**: Implement gradual unfreezing in 3 steps (unfreeze 10 layers, then 20, then all). Compare the final validation accuracy with a single-step unfreeze.
-
-4. **Catastrophic Forgetting Demo**: Intentionally cause catastrophic forgetting by fine-tuning with a very large learning rate (`1e-2`). Observe the sudden increase in validation loss.
-
-5. **Checkpoint Recovery**: Add `ModelCheckpoint` to your fine-tuning run. After training, reload the best saved model and verify it achieves higher accuracy than the final epoch's model.
-
----
-
+2. **Learning Rate Sensitivity:** Run three separate Phase 2 fine-tuning runs with learning rates `[1e-3, 1e-4, 1e-5]`. Plot the validation loss for all three on the same axes. Print which learning rate causes the validation loss to spike (catastrophic forgetting) and which converges most smoothly.
 ## Review Questions
 
 1. What is the key difference between feature extraction and fine-tuning?

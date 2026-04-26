@@ -212,18 +212,9 @@ def grad_cam(model, image, layer_name, class_index):
 
 ## Activities
 
-1. **Visualize Feature Maps**: Pick a trained CNN. Create an activation model and visualize the feature maps of the first, middle, and last convolutional layers on a sample image. What patterns do you see?
+1. **Grad-CAM Implementation:** Implement Grad-CAM using `tf.GradientTape` targeting the last Conv2D layer of your CIFAR-10 model. Apply it to 5 correctly classified test images. For each, display the original image with the heat-map overlay (use `cv2.applyColorMap` or matplotlib's `imshow` with alpha blending).
 
-2. **Grad-CAM on Correct Predictions**: Apply Grad-CAM to 5 correctly classified images. Does the heatmap focus on the relevant part of the image?
-
-3. **Grad-CAM on Incorrect Predictions**: Find 5 misclassified images. Apply Grad-CAM. Can you explain why the model got it wrong based on where it was "looking"?
-
-4. **Compare Layers**: Apply Grad-CAM using different convolutional layers (first conv vs. last conv) as the target layer. How do the heatmaps differ?
-
-5. **Filter Maximization**: For the first convolutional layer, generate the input image that maximally activates a specific filter by gradient ascent. What pattern does it prefer?
-
----
-
+2. **Feature Map Visualization:** Build a Keras Model whose outputs are the activations of the first and last Conv2D layers in your trained network. Run a single test image through it. Display a 4×4 grid of feature maps from the first layer and another 4×4 grid from the last layer. Describe in a comment what visual patterns each layer captures.
 ## Review Questions
 
 1. Why is interpretability important for deep learning models used in medical applications?

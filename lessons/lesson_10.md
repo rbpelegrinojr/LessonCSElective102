@@ -307,23 +307,9 @@ plt.show()
 
 ## Activities
 
-### Activity 10.1 — Manual Training Loop
-Implement a training loop from scratch using only NumPy on a simple binary classification problem. Print the loss at each epoch and observe it decreasing.
+1. **Manual Training Loop:** In NumPy, implement a full training loop for a binary logistic regression problem: randomly initialize weights, compute sigmoid output, compute binary cross-entropy loss, compute gradients by hand, and update weights. Print the loss at every 100 epochs and confirm it decreases.
 
-### Activity 10.2 — Keras Training
-Train the CNN from Lesson 8 on MNIST using `model.fit()`. Use all parameters discussed in this lesson. What final validation accuracy do you achieve?
-
-### Activity 10.3 — Curve Analysis
-Plot training and validation accuracy/loss curves from Activity 10.2. Identify whether the model is overfitting, underfitting, or training healthily.
-
-### Activity 10.4 — Learning Rate Experiment
-Run Section 4 of `code/lesson_10.py`. Train the same network with learning rates [0.1, 0.01, 0.001, 0.0001]. Plot all four loss curves. Which learning rate converges fastest and most stably?
-
-### Activity 10.5 — Callbacks
-Add EarlyStopping with patience=3 to your training run from Activity 10.2. Does it stop before your specified number of epochs? What was the best validation accuracy?
-
----
-
+2. **Keras model.fit() Training:** Train the LeNet-5 model from Lesson 8 on MNIST using `model.fit()` with 10 epochs, batch size 64, a validation split of 0.1, and the Adam optimizer. After training, plot the training and validation accuracy curves on the same axes using matplotlib.
 ## Review Questions
 
 1. Describe the four steps of one training iteration in a neural network.

@@ -253,20 +253,9 @@ See `code/lesson_05.py` for hands-on examples demonstrating:
 
 ## Activities
 
-1. **Manual Convolution:** Given this 4×4 input and 2×2 kernel (stride=1, no padding), manually compute all elements of the output feature map. Show every dot-product calculation.
-   - Input: `[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]`
-   - Kernel: `[[1,0],[0,-1]]`
+1. **NumPy Convolution:** Implement a `conv2d(image, kernel, stride=1)` function in pure NumPy using nested loops. Apply it to a 4×4 input with a 2×2 kernel and verify the result matches `scipy.signal.correlate2d(image, kernel, mode='valid')`.
 
-2. **Output Size Calculator:** Use the formula `floor((W - F + 2P) / S) + 1` to calculate output sizes for: (a) Input=32, F=5, P=0, S=1; (b) Input=64, F=3, P=1, S=2; (c) Input=224, F=7, P=3, S=2. Verify your answers are correct by thinking about whether they make sense.
-
-3. **Filter Interpretation:** Draw (or describe) what each of these 3×3 filters would output when applied to a simple image with a vertical black bar on a white background: Sobel-X, Sobel-Y, and the blur filter. What does the output tell you about each filter's function?
-
-4. **Receptive Field Calculation:** Calculate the receptive field size after 1, 2, 3, 4, and 5 stacked 3×3 convolutional layers (no pooling, stride=1). Plot receptive field size vs. depth. At what depth does the receptive field cover a 224×224 input image?
-
-5. **Architecture Design:** Design a CNN for 224×224 RGB images that produces a feature map of 7×7 at the output of the convolutional stack. Specify layer types, kernel sizes, strides, and padding. Calculate the output size at each step.
-
----
-
+2. **Edge Detection with tf.nn.conv2d:** Using `tf.nn.conv2d`, apply both a Sobel-horizontal and a Sobel-vertical kernel to a grayscale image. Display the original image and the two edge maps side by side in a 1×3 matplotlib subplot.
 ## Review Questions
 
 1. Explain the difference between convolution and cross-correlation. Why does the distinction not matter in practice for trained CNNs?

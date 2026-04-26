@@ -257,23 +257,9 @@ def softmax(x):
 
 ## Activities
 
-### Activity 6.1 — Plot and Compare
-Run `code/lesson_06.py` Section 1. Observe how each activation function shapes its output. Which function has the steepest gradient near zero?
+1. **Activation Function Plots:** Write a script that uses NumPy and matplotlib to plot sigmoid, tanh, ReLU, and Leaky ReLU (alpha=0.1) on the range x ∈ [−5, 5] in a single figure with a legend. Mark the derivative at x=0 for each function in the plot title.
 
-### Activity 6.2 — Vanishing Gradient Experiment
-In Section 2 of the code, observe the gradient magnitude through layers using sigmoid versus ReLU. After how many layers does the sigmoid gradient become effectively zero?
-
-### Activity 6.3 — Training Speed Comparison
-Run Section 3. Build two identical networks, one with sigmoid activations and one with ReLU activations. Train both on MNIST for 5 epochs. Record the accuracy at the end of each epoch. Which converges faster?
-
-### Activity 6.4 — Softmax Exploration
-Manually compute softmax for these logits: [3.0, 1.0, 0.2]. Verify that the outputs sum to 1. What happens if you multiply all logits by 2?
-
-### Activity 6.5 — Dead ReLU Hunt
-In Section 5, create a network with a very high learning rate. Count what fraction of neurons output 0 after a single forward pass. Repeat with Leaky ReLU and compare.
-
----
-
+2. **Training Speed Comparison:** Build two identical `keras.Sequential` networks for MNIST — one using sigmoid activations throughout and one using ReLU. Train both for 5 epochs with Adam and plot both validation accuracy curves on the same axes. Record which converges faster.
 ## Review Questions
 
 1. Why does a network without activation functions collapse into a linear model, regardless of depth?

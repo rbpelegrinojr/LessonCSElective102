@@ -234,14 +234,9 @@ The journey from here leads to object detection (YOLO, SSD), image segmentation 
 
 ## Activities
 
-1. **Run the Full Pipeline**: Execute `code/lesson_20.py` end to end. Record the final validation accuracy and training time.
-2. **Confusion Matrix Analysis**: Identify the two most-confused flower classes. Gather 20 additional images of each and retrain. Does accuracy improve?
-3. **Backbone Comparison**: Replace MobileNetV2 with EfficientNetB0. Compare final accuracy, model size, and training time.
-4. **Grad-CAM Gallery**: Create a 4×5 grid of Grad-CAM visualizations (5 classes × correct + incorrect). Present to class.
-5. **Inference Function Demo**: Run `predict_image()` on 10 photos taken with a smartphone. How well does the model generalize to real-world images?
+1. **Run the Full Pipeline:** Execute `code/lesson_20.py` end to end on the TensorFlow Flowers dataset. Record and print: final validation accuracy, total training time (Phase 1 + Phase 2), and model file size on disk.
 
----
-
+2. **Backbone Swap:** Replace the MobileNetV2 backbone with `tf.keras.applications.EfficientNetB0`. Retrain the full two-phase pipeline on the same Flowers dataset. Compare and print: final validation accuracy, total parameter count (trainable vs. frozen), and average training time per epoch for both backbones side by side.
 ## Review Questions
 
 1. What are the 8 main steps of the end-to-end ML pipeline in this capstone?

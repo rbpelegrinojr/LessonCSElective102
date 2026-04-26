@@ -294,23 +294,9 @@ model.summary()
 
 ## Activities
 
-### Activity 8.1 — LeNet-5 from Scratch
-Implement LeNet-5 exactly as described in this lesson using Keras. Check that your model summary shows approximately 61,706 total parameters.
+1. **LeNet-5 in Keras:** Implement LeNet-5 using `keras.Sequential` (Conv2D(6,5,tanh) → AvgPool → Conv2D(16,5,tanh) → AvgPool → Flatten → Dense(120,tanh) → Dense(84,tanh) → Dense(10,softmax)). Run `model.summary()` and verify the total parameter count is approximately 61 706.
 
-### Activity 8.2 — Parameter Counting
-Before running `model.summary()`, manually calculate the parameter count for each layer in your 3-block CNN. Verify your calculation against Keras's output.
-
-### Activity 8.3 — Architecture Modification
-Start with the tiny CNN in Section 2 of the code. Double the number of filters in each block. How does this affect total parameter count and training accuracy after 3 epochs?
-
-### Activity 8.4 — Forward Pass Exploration
-Use `model.predict()` on a single image. Print the output probabilities. Which class has the highest probability? Does it match the true label?
-
-### Activity 8.5 — Sequential vs Functional
-Rewrite the tiny CNN from Activity 8.2 using the Functional API. Verify both models have identical parameter counts and architectures.
-
----
-
+2. **Architecture Modification:** Start with the tiny 3-block CNN from `code/lesson_08.py`. Double the number of filters in every Conv2D layer. Compare total parameter count and validation accuracy after 3 epochs on MNIST to the original architecture.
 ## Review Questions
 
 1. What are the two main components of a complete CNN, and what role does each play?
